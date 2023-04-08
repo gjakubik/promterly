@@ -11,17 +11,102 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model User {
+  id                 String               @id @default(cuid())
+  clerkUserId        String               @unique
+  themePreference    String
+  promptRequestsMade Int                  @default(0)
+  templates          Template[]           @relation("UserTemplates")
+  favoritedTemplates FavoritedTemplate[]  @relation("UserFavoritedTemplates")
+  folders            Folder[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
 }
 
-model User {
-  id                 String   @id @default(cuid())
-  clerkUserId        String   @unique
-  themePreference    String
-  promptRequestsMade Int      @default(0)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+model Template {
+  id          String               @id @default(cuid())
+  title       String
+  text        String               @db.Text
+  textOrder   TextOrder
+  user        User                 @relation("UserTemplates", fields: [userId], references: [id])
+  userId      String
+  fields      Field[]
+  favoritedBy FavoritedTemplate[]  @relation("TemplateFavoritedTemplates")
+  tags        Tag[]                @relation("TemplateTags")
+  category    Category?            @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+  folder      Folder?              @relation("FolderTemplates", fields: [folderId], references: [id])
+  folderId    String?
+  visibility  Visibility
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+}
+
+model Field {
+  id         String      @id @default(cuid())
+  name       String
+  templateId String
+  template   Template    @relation(fields: [templateId], references: [id])
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model FavoritedTemplate {
+  id            String      @id @default(cuid())
+  user          User        @relation("UserFavoritedTemplates", fields: [userId], references: [id])
+  userId        String
+  template      Template    @relation("TemplateFavoritedTemplates", fields: [templateId], references: [id])
+  templateId    String
+  customFields  CustomField[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model CustomField {
+  id                  String            @id @default(cuid())
+  value               String
+  fieldName           String            // Store the field name directly in the CustomField model
+  favoritedTemplateId String
+  favoritedTemplate   FavoritedTemplate @relation(fields: [favoritedTemplateId], references: [id])
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+}
+
+model Folder {
+  id        String      @id @default(cuid())
+  name      String
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  parent    Folder?     @relation("FolderParent", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parentId  String?
+  children  Folder[]    @relation("FolderParent")
+  templates Template[]  @relation("FolderTemplates")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Tag {
+  id        String      @id @default(cuid())
+  name      String      @unique
+  templates Template[]  @relation("TemplateTags")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Category {
+  id        String      @id @default(cuid())
+  name      String      @unique
+  templates Template[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+enum TextOrder {
+  BEFORE_TEMPLATE
+  AFTER_TEMPLATE
+}
+
+enum Visibility {
+  PRIVATE
+  PUBLIC
 }
