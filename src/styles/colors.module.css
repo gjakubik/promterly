@@ -11,22 +11,6 @@
   --background-dark-light: #1e1e1e;
   --background-dark-dark: #2c2c2c;
 
-  /* Muted colors - Light mode */
-  --muted-blue-light: #89cff0;
-  --muted-purple-light: #c5b4e3;
-  --muted-green-light: #a5d6a7;
-  --muted-orange-light: #f2cc8f;
-  --muted-red-light: #e6a8a8;
-  --muted-yellow-light: #f9dc9a;
-
-  /* Muted colors - Dark mode */
-  --muted-blue-dark: #417b9b;
-  --muted-purple-dark: #7d5eaa;
-  --muted-green-dark: #528955;
-  --muted-orange-dark: #c47f35;
-  --muted-red-dark: #a85656;
-  --muted-yellow-dark: #c6a45a;
-
   /* Text colors - Light mode */
   --text-light: #ffffff;
   --text-dark: #333333;
@@ -36,4 +20,10 @@
   --text-dark-light: #e0e0e0;
   --text-dark-dark: #bfbfbf;
   --text-dark-muted: #999999;
+
+  /* Custom colors - Light mode */
+  --custom-purple-light: #b39ddb;
+
+  /* Custom colors - Dark mode */
+  --custom-purple-dark: #9575cd;
 }
