@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import styles from './index.module.css';
 import { type NextPage } from 'next';
 import Head from 'next/head';
@@ -10,6 +11,11 @@ const Home: NextPage = () => {
   const user = useUser();
 
   const hello = api.example.hello.useQuery({ text: 'from tRPC' });
+
+  useEffect(() => {
+    // Update the class name of the body element based on the desired mode
+    document.body.className = true ? 'light-mode' : 'dark-mode';
+  }, []);
 
   return (
     <>
@@ -41,7 +47,7 @@ const Home: NextPage = () => {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#e0f2fe" />
       </Head>
-      <main className={styles.main}>
+      <main>
         <div>
           {user.isLoaded && <h1>Hello {user.user?.username}</h1>}
           {user.isLoaded && <p>{JSON.stringify(user)}</p>}
