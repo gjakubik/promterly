@@ -16,3 +16,12 @@ model Example {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
+
+model User {
+  id                 String   @id @default(cuid())
+  clerkUserId        String   @unique
+  themePreference    String
+  promptRequestsMade Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
