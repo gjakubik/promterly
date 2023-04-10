@@ -50,7 +50,11 @@ const useUserData = () => {
     return { userData, refetchUser };
 };
 
-export const WithAuth = ({ children }) => {
+interface WithAuthProps {
+    children: React.ReactNode;
+}
+
+export const WithAuth: React.FC<WithAuthProps> = ({ children }) => {
     const { userData, refetchUser } = useUserData();
 
     return (
