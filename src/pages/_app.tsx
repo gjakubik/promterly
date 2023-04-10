@@ -6,7 +6,11 @@ import { lightTheme, darkTheme } from '../theme';
 import { PrivateUserContext, WithAuth } from '~/auth';
 import { api } from '~/utils/api';
 
-const ThemeSwitcher = ({ children }) => {
+interface ThemeSwitcherProps {
+    children: React.ReactNode;
+}
+
+const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ children }) => {
     const { userData } = useContext(PrivateUserContext);
 
     const themePreference = userData?.themePreference ?? 'DARK';
