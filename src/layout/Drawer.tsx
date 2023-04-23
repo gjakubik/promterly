@@ -19,7 +19,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import Logo from '~/core/Logo';
 import styles from './Drawer.module.css';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
     drawer: {
         width: 250,
     },
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
     },
-}));
+});
 
 const CustomDrawer = () => {
     const classes = useStyles();
@@ -60,7 +60,7 @@ const CustomDrawer = () => {
         setOpenSection2(!openSection2);
     };
 
-    const handleThemeSwitch = async () => {
+    const handleThemeSwitch = () => {
         const newThemePreference =
             themePreference === 'LIGHT' ? 'DARK' : 'LIGHT';
         try {

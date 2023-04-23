@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Drawer from './Drawer';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
     mainContent: {
         marginLeft: 250,
     },
-}));
+});
 
 interface LayoutProps {
     children: React.ReactNode;

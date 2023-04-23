@@ -5,8 +5,8 @@ import type { MyUser } from '~/types/MyUser';
 
 export const PrivateUserContext = React.createContext<{
     userData: MyUser | null;
-    refetchUser: () => void;
-}>({ userData: null, refetchUser: () => {} });
+    refetchUser: () => Promise<void>;
+}>({ userData: null, refetchUser: async () => Promise.resolve() });
 
 const useUserData = () => {
     const { user } = useUser();
