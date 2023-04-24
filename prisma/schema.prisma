@@ -65,7 +65,7 @@ model FavoritedTemplate {
 model CustomField {
   id                  String            @id @default(cuid())
   value               String
-  fieldName           String            // Store the field name directly in the CustomField model
+  fieldName           String            
   favoritedTemplateId String
   favoritedTemplate   FavoritedTemplate @relation(fields: [favoritedTemplateId], references: [id])
   createdAt           DateTime          @default(now())

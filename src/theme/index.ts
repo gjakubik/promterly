@@ -19,10 +19,10 @@ const lightTheme = responsiveFontSizes(
             MuiButton: {
                 styleOverrides: {
                     contained: {
-                        color: 'white',
+                        color: 'black',
                     },
                     text: {
-                        color: 'white',
+                        color: 'black',
                     },
                 },
             },

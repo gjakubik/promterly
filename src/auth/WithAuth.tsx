@@ -3,10 +3,14 @@ import React, { useState, useCallback } from 'react';
 import { api } from '~/utils/api';
 import type { MyUser } from '~/types/MyUser';
 
+const defaultRefetchUser: () => void = () => {
+    // This is a default no-op refetchUser function.
+};
+
 export const PrivateUserContext = React.createContext<{
     userData: MyUser | null;
-    refetchUser: () => Promise<void>;
-}>({ userData: null, refetchUser: async () => Promise.resolve() });
+    refetchUser: () => void;
+}>({ userData: null, refetchUser: defaultRefetchUser });
 
 const useUserData = () => {
     const { user } = useUser();
@@ -41,9 +45,9 @@ const useUserData = () => {
         }
     );
 
-    const refetchUser = useCallback(async () => {
+    const refetchUser = useCallback(() => {
         if (user?.id) {
-            await userQuery.refetch();
+            void userQuery.refetch();
         }
     }, [user, userQuery]);
 

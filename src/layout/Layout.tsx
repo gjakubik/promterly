@@ -6,6 +6,15 @@ const useStyles = makeStyles({
     mainContent: {
         marginLeft: 250,
     },
+    content: {
+        marginTop: 64,
+        padding: 20,
+        '@media (min-width: 1024px)': {
+            width: '50%',
+            marginLeft: '25%',
+            marginRight: '25%',
+        },
+    },
 });
 
 interface LayoutProps {
@@ -18,7 +27,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <>
             <Drawer />
-            <main className={classes.mainContent}>{children}</main>
+            <main className={classes.mainContent}>
+                <div className={classes.content}>{children}</div>
+            </main>
         </>
     );
 };
